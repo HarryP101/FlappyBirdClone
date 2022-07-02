@@ -13,5 +13,10 @@ bool FlappyBirdWorldEngine::OnUserCreate()
 
 bool FlappyBirdWorldEngine::OnUserUpdate(float fElapsedTime)
 {
+    for (auto&& item : worldItems_)
+    {
+        item->Update(fElapsedTime);
+    }
+
     return true;
 }
