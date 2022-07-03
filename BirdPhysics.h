@@ -1,9 +1,12 @@
 #pragma once
 
+#include "WorldToScreenPixelConverter.h"
+
 class BirdPhysics
 {
 public:
-	BirdPhysics(const double xVel, const double yVel);
+	BirdPhysics(const double xVel, const double yVel,
+		const WorldToScreenPixelConverter& worldConverter);
 
 	void UpdateWorldPosition(const float fElapsedTime);
 
@@ -15,4 +18,6 @@ private:
 	double yWorldPosition_;
 	double xWorldVelocity_;
 	double yWorldVelocity_;
+
+	WorldToScreenPixelConverter worldConverter_;
 };

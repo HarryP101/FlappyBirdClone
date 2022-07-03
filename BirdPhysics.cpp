@@ -1,7 +1,10 @@
 #include "BirdPhysics.h"
 
-BirdPhysics::BirdPhysics(const double xVel, const double yVel) 
-	: xWorldVelocity_(xVel), yWorldVelocity_(yVel)
+#include "WorldToScreenPixelConverter.h"
+
+BirdPhysics::BirdPhysics(const double xVel, const double yVel,
+	const WorldToScreenPixelConverter& worldConverter) 
+	: xWorldVelocity_(xVel), yWorldVelocity_(yVel), worldConverter_(worldConverter)
 {}
 
 void BirdPhysics::UpdateWorldPosition(const float fElapsedTime)
@@ -10,12 +13,13 @@ void BirdPhysics::UpdateWorldPosition(const float fElapsedTime)
 	yWorldPosition_ += static_cast<double>(fElapsedTime) * yWorldVelocity_;
 }
 
+// TODO: Perform mapping from world position in float points to screen position in integers
 int BirdPhysics::X() const
 {
-	return static_cast<int>(xWorldPosition_);
+	return worldConverter_.ConvertWorldXPosToPixel(xWorldPosition_);
 }
 
 int BirdPhysics::Y() const
 {
-	return static_cast<int>(yWorldPosition_);
+	return worldConverter_.ConvertWorldYPosToPixel(yWorldPosition_);
 }

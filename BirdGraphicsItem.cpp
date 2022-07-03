@@ -1,8 +1,12 @@
 #include "BirdGraphicsItem.h"
 
-BirdGraphicsItem::BirdGraphicsItem(const std::vector<Point2D<int>>& graphics, const double xVel, const double yVel) 
+#include "WorldToScreenPixelConverter.h"
+
+BirdGraphicsItem::BirdGraphicsItem(const std::vector<Point2D<int>>& graphics,
+	const double xVel, const double yVel,
+	const WorldToScreenPixelConverter& worldConverter) 
 	: GraphicsItem(graphics)
-	, birdPhysics_(BirdPhysics(xVel, yVel))
+	, birdPhysics_(BirdPhysics(xVel, yVel, worldConverter))
 {
 }
 
@@ -10,9 +14,5 @@ void BirdGraphicsItem::Update(const float deltaTime)
 {
 	birdPhysics_.UpdateWorldPosition(deltaTime);
 
-	for (auto&& point2d : GetPointsToRaster())
-	{
-		point2d.X() = point2d.X() + birdPhysics_.X();
-		point2d.Y() = point2d.Y() + birdPhysics_.Y();
-	}
+	UpdateScreenPosition(birdPhysics_.X(), birdPhysics_.Y());
 }

@@ -6,11 +6,13 @@
 
 #include "BirdPhysics.h"
 #include "Point2D.h"
+#include "WorldToScreenPixelConverter.h"
 
 class BirdGraphicsItem : public GraphicsItem 
 {
 public:
-	BirdGraphicsItem(const std::vector<Point2D<int>>& graphics, const double xVel, const double yVel);
+	BirdGraphicsItem(const std::vector<Point2D<int>>& graphics,
+	 const double xVel, const double yVel, const WorldToScreenPixelConverter& worldConverter);
 
 	void Update(const float deltaTime) override;
 private:

@@ -11,8 +11,11 @@ public:
 
 	virtual void Update(const float deltaTime) = 0;
 
-	const std::vector<Point2D<int>>& GetPointsToRaster() const;
-	std::vector<Point2D<int>>& GetPointsToRaster();
+	const std::vector<Point2D<int>>& GetPointsToRaster() const; 
+protected:
+	void UpdateScreenPosition(const int screenX, const int screenY);
+
 private:
-	std::vector<Point2D<int>> pointsToRaster_;
+	const std::vector<Point2D<int>> staticGraphicsPoints_;
+	std::vector<Point2D<int>> screenPositionGraphicsPoints_;
 };

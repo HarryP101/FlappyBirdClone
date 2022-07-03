@@ -1,16 +1,21 @@
 #include "GraphicsItem.h"
 
-GraphicsItem::GraphicsItem(const std::vector<Point2D<int>>& points) : pointsToRaster_(points)
+GraphicsItem::GraphicsItem(const std::vector<Point2D<int>>& points) :
+ 	staticGraphicsPoints_(points), screenPositionGraphicsPoints_(points)
 {
 
 }
 
 const std::vector<Point2D<int>>& GraphicsItem::GetPointsToRaster() const 
 {
-	return pointsToRaster_;
+	return screenPositionGraphicsPoints_;
 }
 
-std::vector<Point2D<int>>& GraphicsItem::GetPointsToRaster()
+void GraphicsItem::UpdateScreenPosition(const int screenX, const int screenY)
 {
-	return pointsToRaster_;
+	const Point2D<int> screenPoint(screenX, screenY);
+	for (auto i = 0; i < staticGraphicsPoints_.size(); ++i)
+	{
+		screenPositionGraphicsPoints_[i] = staticGraphicsPoints_[i] + screenPoint;
+	}
 }

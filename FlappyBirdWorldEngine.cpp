@@ -5,6 +5,12 @@
 #include "FlappyBirdWorldEngine.h"
 #include "BirdGraphicsItem.h"
 #include "BirdPhysics.h"
+#include "WorldToScreenPixelConverter.h"
+
+constexpr double WORLD_WIDTH = 100.0;
+constexpr double WORLD_HEIGHT = 100.0;
+
+//constexpr double SCROLL_SPEED = 10;
 
 FlappyBirdWorldEngine::FlappyBirdWorldEngine()
 {
@@ -26,7 +32,9 @@ bool FlappyBirdWorldEngine::OnUserCreate()
         return graphics_;
     }();
 
-    BirdGraphicsItem birdGraphics(graphics, 1.0, 0.0);
+    WorldToScreenPixelConverter worldConverter(WORLD_WIDTH, WORLD_HEIGHT, ScreenWidth(), ScreenHeight());
+
+    BirdGraphicsItem birdGraphics(graphics, 10.0, 0.0, worldConverter);
 
     worldItems_.push_back(std::make_unique<BirdGraphicsItem>(birdGraphics));
 
