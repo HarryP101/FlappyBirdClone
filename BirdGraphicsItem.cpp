@@ -1,18 +1,18 @@
 #include "BirdGraphicsItem.h"
 
-BirdGraphicsItem::BirdGraphicsItem(const BirdPhysics& birdPhysics) : birdPhysics_(birdPhysics)
+BirdGraphicsItem::BirdGraphicsItem(const std::vector<Point2D<int>>& graphics, const double xVel, const double yVel) 
+	: GraphicsItem(graphics)
+	, birdPhysics_(BirdPhysics(xVel, yVel))
 {
-
 }
 
-void BirdGraphicsItem::Update(const float deltaTime);
+void BirdGraphicsItem::Update(const float deltaTime)
 {
+	birdPhysics_.UpdateWorldPosition(deltaTime);
+
 	for (auto&& point2d : GetPointsToRaster())
 	{
-		const auto xIncrement = static_cast<int>(deltaTime * birdPhysics_.XVelocity());
-		const auto yIncrement = static_cast<int>(deltaTime * birdPhysics_.YVelocity());
-
-		point2d.X() = point2d.X() + xIncrement;
-		point2d.Y() = point2d.Y() + yIncrement;
+		point2d.X() = point2d.X() + birdPhysics_.X();
+		point2d.Y() = point2d.Y() + birdPhysics_.Y();
 	}
 }
