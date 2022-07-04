@@ -4,7 +4,7 @@
 
 #include <vector>
 
-#include "BirdPhysics.h"
+#include "WorldPhysics.h"
 #include "Point2D.h"
 #include "WorldToScreenPixelConverter.h"
 
@@ -16,5 +16,5 @@ public:
 
 	void Update(const float deltaTime) override;
 private:
-	BirdPhysics birdPhysics_;
+	WorldPhysics worldPhysics_;
 };

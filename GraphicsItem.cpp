@@ -14,7 +14,7 @@ const std::vector<Point2D<int>>& GraphicsItem::GetPointsToRaster() const
 void GraphicsItem::UpdateScreenPosition(const int screenX, const int screenY)
 {
 	const Point2D<int> screenPoint(screenX, screenY);
-	for (auto i = 0; i < staticGraphicsPoints_.size(); ++i)
+	for (size_t i = 0; i < staticGraphicsPoints_.size(); ++i)
 	{
 		screenPositionGraphicsPoints_[i] = staticGraphicsPoints_[i] + screenPoint;
 	}

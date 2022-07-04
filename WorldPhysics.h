@@ -2,10 +2,10 @@
 
 #include "WorldToScreenPixelConverter.h"
 
-class BirdPhysics
+class WorldPhysics
 {
 public:
-	BirdPhysics(const double xVel, const double yVel,
+	WorldPhysics(const double xVel, const double yVel,
 		const WorldToScreenPixelConverter& worldConverter);
 
 	void UpdateWorldPosition(const float fElapsedTime);
